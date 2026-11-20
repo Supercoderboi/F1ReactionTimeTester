@@ -1,0 +1,59 @@
+.lights{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+}
+
+body{
+    background-color: #222;
+    margin: 0;
+}
+
+.circle{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background-color: red;
+    border: 5px solid black;
+    
+}
+
+.speedometer{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: #111;
+    border: 5px solid black;
+    position: relative;
+    flex-shrink: 0;
+    
+}
+.cockpit{
+    width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 100px;
+padding-top: 50px;
+}
+.needle{
+    width: 5px;
+    height: 100px;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(0deg);
+}
+
+
+.speed-text {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+}
