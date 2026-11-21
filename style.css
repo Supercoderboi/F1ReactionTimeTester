@@ -509,3 +509,40 @@ box-sizing: border-box;
         gap: 10px;
     }
 }
+
+.highscores{
+    position: absolute;
+    padding: 3px;
+    height: fit-content;
+    width: 50%;
+
+    /*  align-items: center; */
+    
+    /* display: flex; */
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.096);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.item{
+
+    height: 25px;
+    text-align: center;
+    justify-content: center;
+    color: white;
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.096);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    
+    padding: 20px 50px;
+}

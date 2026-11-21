@@ -1,3 +1,4 @@
+const highscorebtn = document.getElementById("score-panel")
 const needle = document.getElementById('needle');
 const speedText = document.getElementById('speed-text');
 const speedometer = document.getElementById('speedometer');
@@ -6,21 +7,39 @@ const light2 = document.getElementById('light2');
 const light3 = document.getElementById('light3');
 const light4 = document.getElementById('light4');
 const light5 = document.getElementById('light5');
-let hi = document.getElementById('HighScore');
+const hi = document.getElementById('HighScore');
+const hs = document.getElementById("hs");
+
+
+let openedList = false;
 let  highscore = 0;
+let highscoreList= JSON.parse(localStorage.getItem('Highscore')) || [];
 let angle = 270;
 let tim = 0;
 let needleInterval;
 let gameActive = false;
 let lightsRunning = false;
 let startTime;
-hi.textContent = localStorage.getItem("Highscore");
+
+const getHighest = function(arr) {
+    let validScores = arr.filter(score => score > 0);
+
+    if(validScores.length === 0) return 0;
+
+    return Math.min(...validScores);
+}
+
+
+
 // console.log(localStorage.getItem("Highscore"));
 if(localStorage.getItem("Highscore") === null){
-    localStorage.setItem("Highscore", 0);
+     localStorage.setItem('Highscore', JSON.stringify([0]))
     highscore = 0;
+
+
 } else{
-    highscore = localStorage.getItem("Highscore");
+    highscore = getHighest(JSON.parse(localStorage.getItem('Highscore')));
+    hi.textContent = highscore
 // console.log(highscore);
 }
 
@@ -76,9 +95,25 @@ speedometer.addEventListener('click', async (e) => {
         if(tim<highscore || highscore==0){
             highscore = tim;
             hi.textContent = highscore;
-            localStorage.setItem("Highscore", highscore);
             
         }
+         //aim is to push the highscore int oarray and remove the slowest one
+
+            if(highscoreList.length>10){
+            let temp =highscoreList[0];
+            for(let i = highscoreList.length; i!=0; i--){
+                if(highscoreList[i] > temp){
+                    temp=highscoreList[i]
+                }
+                
+                
+            }
+            highscoreList.splice(highscoreList.indexOf(temp),1); 
+        }
+            highscoreList.push(tim);
+            // localStorage.setItem("Highscore", highscoreList);
+            localStorage.setItem('Highscore', JSON.stringify(highscoreList));
+            console.log(highscoreList); 
         stopNeedle();
             gameActive = false;
             reset();
@@ -108,3 +143,41 @@ function startNeedle() {
 function stopNeedle() {
     clearInterval(needleInterval);
 }
+
+highscorebtn.addEventListener("click", (e) => {
+    console.log("cli");
+
+    openedList = true;
+    hs.classList.remove("hidden");
+
+    let hsArr = JSON.parse(localStorage.getItem("Highscore")) || [];
+
+    if (hsArr.length > 0) {
+        
+        hs.innerHTML = "";
+        let ordered = [...hsArr].sort((a, b) => a - b);
+
+        console.log(ordered);
+        let i =1;
+        // Display scores
+        ordered.forEach(score => {
+            hs.insertAdjacentHTML("beforeend", `<div class="item">${i}. ${score}</div>`)
+            i++;
+        });
+
+    
+    } else {
+        lbl.classList.remove("hidden");
+    }
+});
+
+document.addEventListener("click", (e)=>{
+    // console.log(e.target.className) 
+    
+    if(openedList && e.target.className!="score-panel"){
+        openedList = false;
+        hs.classList.add("hidden");
+    }
+})
+
+
