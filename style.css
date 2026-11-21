@@ -1,32 +1,64 @@
-.lights{
+/* .lights{
     justify-content: center;
     align-items: center;
     display: flex;
-    gap: 10px;
-}
+    gap: 18px;
+
+    background:linear-gradient(180deg, #333, #151515 40%, #080808);
+    padding: 2px 30px;
+    border: 3px solid #444;
+    border-radius: 20px;
+    margin-top: 0;
+    z-index: 2;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+} */
 
 body{
-    background-color: #222;
     margin: 0;
+    min-height: 100vh;
+    background:
+        linear-gradient(rgb(161, 8, 8),  rgb(0,0,0));
+
+    background-size: cover;
+    background-position: center center; 
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    color:white;
+    font-family: arial, sans-serif;
+    overflow-x: hidden;
 }
 
+/*
+
 .circle{
-    width:100px;
-    height:100px;
+    width:75px;
+    height:75px;
     border-radius:50%;
-    background-color: red;
-    border: 5px solid black;
+    background: radial-gradient(circle at 35% 30%, #541717, #260606 60%, #100000);
+
+    border:5px solid #080808;
+    box-shadow:
+        inset 0 0 12px #000,
+        0 0 2px #505050;
+
+    transition: 0.25s ease;
     
+
 }
 
 .speedometer{
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    background-color: #111;
-    border: 5px solid black;
+    background: #080808ed;
+
+    border: 5px solid #333;
     position: relative;
     flex-shrink: 0;
+    z-index: 2;
     
 }
 .cockpit{
@@ -34,8 +66,13 @@ body{
 display: flex;
 flex-direction: column;
 align-items: center;
-gap: 100px;
-padding-top: 50px;
+gap: 30px;
+padding-top: 160px;
+min-height: 100vh;
+justify-content: center;
+padding: 30px 0;
+box-sizing: border-box;
+
 }
 .needle{
     width: 5px;
@@ -56,4 +93,419 @@ padding-top: 50px;
     transform: translate(-50%, -50%);
     color: white;
     font-size: 24px;
+}
+
+.circle.active{
+    background: radial-gradient(circle at 35% 30%, #ffaaaa, #ff2222 35%, #c00000 75%, #650000);
+    box-shadow:
+        inset 0 0 8px #ffcccc,
+        0 0 25px rgba(255,0,0,0.8),
+        0 0 50px rgba(266, 0, 0, 0.3);
+    border-color: #330000;
+} 
+
+.tag{
+    color: #ff3030;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+.header h1{
+    font-size: clamp(40px, 7vw, 85px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin: 15px 0;
+}
+
+.header h1 span{
+    color: #ff2020;
+}
+
+#HighScore{
+    background: linear-gradient(135deg, #161616, #050505);
+    border: 1px solid #383838;
+    border-left: 4px solid #ff2020;
+    padding: 20px 40px;
+    text-align: center;
+    color:white;
+    font-size: 22px;
+    letter-spacing: 2px;
+    box-shadow: 0 0 25px #0008;
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --red: #ff2020;
+    --bg: #08090c;
+    --panel: #101116;
+    --white: #f2f2f2;
+    --muted: #92929a;
+}
+
+/* body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(5, 6, 10, 0.25),
+            rgba(5, 6, 10, 0.15) 45%,
+            rgba(5, 6, 10, 0.65)
+        );
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+
+/* MAIN SCREEN */
+
+.game {
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+
+    justify-items: center;
+    align-items: center;
+
+    padding: 0 clamp(15px, 4vw, 60px);
+}
+
+/* HEADER */
+
+.header {
+    width: 100%;
+    text-align: center;
+    padding-top: clamp(12px, 3vh, 30px);
+}
+
+.topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: min(100%, 1200px);
+    margin: auto;
+    border-bottom: 1px solid #ffffff20;
+    padding-bottom: 12px;
+}
+
+.tag {
+    font-size: clamp(9px, 1vw, 12px);
+    color: var(--red);
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.muted {
+    color: #aaa;
+}
+
+.header h1 {
+    font-size: clamp(32px, 5.5vw, 76px);
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: 5px;
+    margin: 12px 0 5px;
+}
+
+.header h1 span {
+    color: var(--red);
+}
+
+.subtitle {
+    font-size: clamp(9px, 1.2vw, 14px);
+    letter-spacing: 3px;
+    color: #bbb;
+    margin: 0 0 15px;
+}
+
+/* START LIGHT GANTRY */
+
+.lights {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(8px, 2vw, 22px);
+
+    width: fit-content;
+    max-width: 100%;
+
+    padding: clamp(12px, 2vw, 24px)
+             clamp(15px, 3vw, 34px);
+
+    background: linear-gradient(180deg, #29292c, #0a0a0c 80%);
+    border: 2px solid #3d3d42;
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px #000a,
+        inset 0 2px 3px #ffffff12;
+
+    z-index: 2;
+}
+
+.circle {
+    width: clamp(34px, 6vw, 76px);
+    aspect-ratio: 1;
+    height: auto;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle at 35% 30%,
+        #551616,
+        #250606 65%,
+        #100000
+    );
+
+    border: 4px solid #080808;
+
+    box-shadow:
+        inset 0 0 12px #000,
+        0 0 0 2px #454545;
+
+    transition: 0.2s ease;
+}
+
+.circle.active {
+    background: radial-gradient(
+        circle at 35% 30%,
+        #ffb0b0,
+        #ff2929 35%,
+        #c00000 75%,
+        #650000
+    );
+
+    box-shadow:
+        inset 0 0 8px #ffcccc,
+        0 0 12px red,
+        0 0 28px #ff000099,
+        0 0 50px #ff000044;
+
+    border-color: #330000;
+}
+
+/* COCKPIT AREA */
+
+.cockpit {
+    width: 100%;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(12px, 2.2vh, 25px);
+    padding-bottom: clamp(10px, 3vh, 30px);
+}
+
+/* SPEEDOMETER */
+
+.speedometer {
+    width: clamp(220px, 34vh, 360px);
+    aspect-ratio: 1;
+    height: auto;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    background: radial-gradient(circle, #111 0%, #050505 72%);
+
+    border: 4px solid #303036;
+    outline: 1px solid #77777750;
+    outline-offset: 5px;
+
+    position: relative;
+
+    box-shadow:
+        0 0 35px #000b,
+        inset 0 0 35px #000;
+
+    cursor: pointer;
+}
+
+/* Needle */
+
+.needle {
+    width: 4px;
+    height: 34%;
+
+    background: linear-gradient(to top, #9d0000, #ff2020, #ff7777);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(270deg);
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 12px #ff202066;
+    z-index: 2;
+}
+
+/* Needle center cap */
+
+.hub {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+
+    background: radial-gradient(circle at 35% 30%, #444, #111 70%);
+
+    border: 2px solid #080808;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 3;
+}
+
+/* Timer */
+
+.speed-text {
+    position: absolute;
+    top: 72%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: white;
+    font-size: clamp(24px, 4vh, 42px);
+    font-weight: 800;
+    font-family: monospace;
+
+    white-space: nowrap;
+    z-index: 4;
+}
+
+.unit {
+    position: absolute;
+    top: 84%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: #92929a;
+    font-size: clamp(8px, 1.2vh, 12px);
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+}
+
+/* HIGH SCORE */
+
+.score-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+
+    width: min(400px, 90vw);
+
+    background: linear-gradient(135deg, #18181b, #070708);
+    border: 1px solid #444;
+    border-left: 3px solid var(--red);
+
+    padding: 12px 22px;
+
+    box-shadow: 0 10px 25px #0008;
+}
+
+.trophy {
+    font-size: 28px;
+}
+
+.score-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.score-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #999;
+}
+
+.score-info h2 {
+    margin: 0;
+    font-size: clamp(16px, 2vh, 22px);
+    font-family: monospace;
+    color: white;
+}
+
+
+/* SHORT SCREENS */
+
+@media (max-height: 750px) {
+    .header h1 {
+        margin: 5px 0;
+    }
+
+    .subtitle {
+        margin-bottom: 8px;
+    }
+
+    .cockpit {
+        gap: 10px;
+    }
+
+    .speedometer {
+        width: clamp(190px, 30vh, 270px);
+    }
+
+    .score-panel {
+        padding: 8px 18px;
+    }
+
+    .instruction {
+        padding: 8px 15px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .topline {
+        justify-content: center;
+    }
+
+    .topline .muted {
+        display: none;
+    }
+
+    .header h1 {
+        letter-spacing: 2px;
+    }
+
+    .lights {
+        gap: 7px;
+        padding: 12px;
+    }
+
+    .circle {
+        width: clamp(32px, 12vw, 55px);
+    }
+
+    .instruction {
+        letter-spacing: 1px;
+        gap: 10px;
+    }
 }

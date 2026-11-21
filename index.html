@@ -8,24 +8,48 @@
     <script src="main.js" type="module"></script>
 </head>
 <body>
-    <div class="lights">
-        <div class="circle light1" id="light1"></div>
-        <div class="circle light2" id="light2"></div>
-        <div class="circle light3" id="light3"></div>
-        <div class="circle light4" id="light4"></div>
-        <div class="circle light5" id="light5"></div>
-    </div>
-    <div class="cockpit"> 
-        
-            <div class="speedometer" id="speedometer">
-                <div class="needle" id="needle"></div>
-                <div class="speed-text" id="speed-text">0</div>
+    <main class="game">
+
+        <header class="header">
+            <div class="topline">
+                <span class="tag">REACTION TEST // 01</span>
+               
             </div>
+
+            <h1>LIGHTS <span>OUT.</span></h1>
+            <p class="subtitle">CLICK ON THE SPEEDOMETER TO START.</p>
+        </header>
+
+        <section class="lights">
+            <div class="circle" id="light1"></div>
+            <div class="circle" id="light2"></div>
+            <div class="circle" id="light3"></div>
+            <div class="circle" id="light4"></div>
+            <div class="circle" id="light5"></div>
+        </section>
+
+        <section class="cockpit">
+            <div class="speedometer" id="speedometer">
+                <div class="dial-marks"></div>
+                <div class="needle" id="needle"></div>
+                <div class="hub"></div>
+
+                <div class="speed-text" id="speed-text">0.000</div>
+                <div class="unit">REACTION TIME · SECONDS</div>
+            </div>
+
+            <div class="score-panel">
+                <span class="trophy">🏆</span>
+                <div class="score-info">
+                    <span class="score-label">PERSONAL BEST</span>
+                    <h2 id="HighScore">0.000 s</h2>
+                </div>
+            </div>
+
             
-        
-    </div>
+            </div>
+        </section>
 
-    <h1 id="HighScore">No High Score Yet</h1>
-
+    </main>
 </body>
 </html>

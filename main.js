@@ -10,13 +10,19 @@ let hi = document.getElementById('HighScore');
 let  highscore = 0;
 let angle = 270;
 let tim = 0;
+let needleInterval;
+let gameActive = false;
+let lightsRunning = false;
+let startTime;
+
 let reset = function() {
-    light1.style.backgroundColor = 'red';
-    light2.style.backgroundColor = 'red';
-    light3.style.backgroundColor = 'red';
-    light4.style.backgroundColor = 'red';
-    light5.style.backgroundColor = 'red';
+    light1.classList.add('active');
+    light2.classList.add('active');
+    light3.classList.add('active');
+    light4.classList.add('active');
+    light5.classList.add('active');
     angle = 270;
+
     needle.style.transform = `translate(-50%, -100%) rotate(${angle}deg)`;
     tim =0;
     speedText.textContent = tim;
@@ -26,9 +32,9 @@ let reset = function() {
 reset();
 function rotateNeedle() {
     angle += 1;
-    tim+=0.1;
+    tim+=(Date.now() - startTime)/1000;
     needle.style.transform = `translate(-50%, -100%) rotate(${angle}deg)`;
-    speedText.textContent = tim;
+    speedText.textContent = tim.toFixed(3)
     console.log(tim);
 }
 // setInterval(rotateNeedle, 100);
@@ -36,46 +42,59 @@ function rotateNeedle() {
 let clicked = false;
 
 speedometer.addEventListener('click', async (e) => {
-   
+    console.log("Clicked!");
 
-    if(!clicked){
-    light1.style.backgroundColor = '#111';
+    if(lightsRunning) return;
+    
+    if(!gameActive && !lightsRunning){
+    lightsRunning = true;
+    light1.classList.remove('active');
     await delay(1000);
-    light2.style.backgroundColor = '#111';
+    light2.classList.remove('active');
     await delay(1000);
-    light3.style.backgroundColor = '#111';
+    light3.classList.remove('active');
     await delay(1000);
-    light4.style.backgroundColor = '#111';
-    const randomDelay = Math.random() * 3000 + 1000; ;
+    light4.classList.remove('active');
+    const randomDelay = Math.random() * 2000 + 1000; ;
     console.log(`Random delay: ${randomDelay}ms`);
     await delay(randomDelay);
-    light5.style.backgroundColor = '#111';
-    }
-    
-
-    if(clicked){
-        if(tim>highscore){
+    light5.classList.remove('active');
+    startTime = Date.now();
+    lightsRunning = false;
+    gameActive = true;
+    startNeedle();
+    } else if(gameActive){
+        if(tim<highscore || highscore===0){
             highscore = tim;
             hi.textContent = highscore;
-            reset();
+            
         }
+        stopNeedle();
+            gameActive = false;
+            reset();
     }
-    clicked= !clicked;
-
+    
 });
 
-while (true) {
-    if (clicked) {
-        console.log("Clicked again!");
-        // clicked = false;
-        rotateNeedle(); 
-    }
+// while (true) {
+//     if (clicked) {
+//         console.log("Clicked again!");
+//         // clicked = false;
+//         rotateNeedle(); 
+//     }
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+//     await new Promise(resolve => setTimeout(resolve, 100));
     
-}
+// }
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function startNeedle() {
+    needleInterval = setInterval(rotateNeedle, 100);
+}
+
+function stopNeedle() {
+    clearInterval(needleInterval);
+}
