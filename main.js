@@ -14,6 +14,15 @@ let needleInterval;
 let gameActive = false;
 let lightsRunning = false;
 let startTime;
+hi.textContent = localStorage.getItem("Highscore");
+// console.log(localStorage.getItem("Highscore"));
+if(localStorage.getItem("Highscore") === null){
+    localStorage.setItem("Highscore", 0);
+    highscore = 0;
+} else{
+    highscore = localStorage.getItem("Highscore");
+// console.log(highscore);
+}
 
 let reset = function() {
     light1.classList.add('active');
@@ -55,7 +64,7 @@ speedometer.addEventListener('click', async (e) => {
     light3.classList.remove('active');
     await delay(1000);
     light4.classList.remove('active');
-    const randomDelay = Math.random() * 2000 + 1000; ;
+    const randomDelay = Math.random() * 500 + 1000; ;
     console.log(`Random delay: ${randomDelay}ms`);
     await delay(randomDelay);
     light5.classList.remove('active');
@@ -64,9 +73,10 @@ speedometer.addEventListener('click', async (e) => {
     gameActive = true;
     startNeedle();
     } else if(gameActive){
-        if(tim<highscore || highscore===0){
+        if(tim<highscore || highscore==0){
             highscore = tim;
             hi.textContent = highscore;
+            localStorage.setItem("Highscore", highscore);
             
         }
         stopNeedle();
