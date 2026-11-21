@@ -174,7 +174,7 @@ highscorebtn.addEventListener("click", (e) => {
         let i =1;
         // Display scores
         ordered.forEach(score => {
-            hs.insertAdjacentHTML("beforeend", `<div class="item">${i}. ${score}</div>`)
+            hs.insertAdjacentHTML("beforeend", `<div class="item">${i})      ${score}</div>`)
             i++;
         });
 
