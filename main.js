@@ -20,6 +20,19 @@ let needleInterval;
 let gameActive = false;
 let lightsRunning = false;
 let startTime;
+let stored = localStorage.getItem("Highscore");
+
+if (stored !== null) {
+    try {
+        let parsed = JSON.parse(stored);
+
+        if (!Array.isArray(parsed)) {
+            localStorage.removeItem("Highscore");
+        }
+    } catch (e) {
+        localStorage.removeItem("Highscore");
+    }
+}
 
 const getHighest = function(arr) {
     let validScores = arr.filter(score => score > 0);
