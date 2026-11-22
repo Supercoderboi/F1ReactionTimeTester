@@ -116,7 +116,7 @@ speedometer.addEventListener('click', async (e) => {
         }
          //aim is to push the highscore int oarray and remove the slowest one
 
-            if(highscoreList.length>10){
+            if(highscoreList.length -1 >10){
             let temp =highscoreList[0];
             for(let i = highscoreList.length; i!=0; i--){
                 if(highscoreList[i] > temp){
