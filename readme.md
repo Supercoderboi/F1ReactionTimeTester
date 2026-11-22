@@ -5,7 +5,10 @@ HOW TO PLAY
 The game works by the player clicking on the dial to start the countdown and when the last light goes off you are supposed to click the dial again, the delay between you clicking the dial and the light going off is your score, the last dial has a random delay from 1000 ms to 2000 ms while the others have a delay of 1000ms! 
 Personal best list is stored in local storage as an array stored in string format. It also generates a Share Card using the canvas.
 
-
+![Before starting sequence](image.png)
+![Timer running](image-1.png)
+![Personal Highscores](image-2.png)
+![Share card afterr download](image-3.png)
 This project was made for hackclub Terra, enjoy!
 ps: MAX VERSTAPPEN IS THE GOAT
 -Ethan Paul
