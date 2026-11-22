@@ -9,8 +9,9 @@ const light4 = document.getElementById('light4');
 const light5 = document.getElementById('light5');
 const hi = document.getElementById('HighScore');
 const hs = document.getElementById("hs");
+const instruction = document.getElementById("instruction")
 
-
+let pastScore=0;
 let openedList = false;
 let  highscore = 0;
 let highscoreList= JSON.parse(localStorage.getItem('Highscore')) || [];
@@ -65,6 +66,7 @@ let reset = function() {
     angle = 270;
 
     needle.style.transform = `translate(-50%, -100%) rotate(${angle}deg)`;
+    pastScore = tim;
     tim =0;
     speedText.textContent = tim;
 
@@ -193,4 +195,74 @@ document.addEventListener("click", (e)=>{
     }
 })
 
+function createShareCard(reactionTime, personalBest) {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
 
+    canvas.width=1080;
+    canvas.height=600;
+
+    const difference = reactionTime - personalBest;
+
+    
+    ctx.fillStyle ="#111318";
+    ctx.fillRect(0,0, canvas.width,canvas.height);
+    ctx.fillStyle="#e10600";
+    ctx.fillRect(0,0, 14, canvas.height);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 34px Arial";
+    ctx.fillText("F1 REACTION TIME TESTER", 55, 75);
+
+
+    ctx.fillStyle = "#e10600"
+    ctx.font = "bold 22px Arial"
+    ctx.fillText("CURRENT SCORE", 55, 115);
+
+    ctx.fillStyle = "#303238";
+    ctx.fillRect(55,145,970,2);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font="bold 48px Arial";
+    ctx.fillText(`${reactionTime.toFixed(3)}s`, 55, 310);
+
+    // ctx.fillStyle = "#e10600";
+    // ctx.font = "bold 48ps Arial";
+    // ctx.fillText("s", 620, 305);
+
+    ctx.fillStyle = "#999da5";
+    ctx.font="22px Arial";
+    ctx.fillText("PERSONAL BEST", 80, 445);
+
+    CSSTransformComponent.fillStyle = "#ffffff";
+    ctx.font = "bold 42px Arial";
+    ctx.fillText(`${personalBest.toFixed(3)} s`, 80, 490);
+
+    ctx.fillStyle = "#24262b"
+    ctx.fillRect(540,400,485,115);
+
+    ctx.fillStyle = "#999da5"
+    ctx.font = "22px Arial";
+    ctx.fillText("DIFFERENCE FROM PB", 565, 445)
+
+    ctx.fillStyle = difference <=0?"#35d07f":"#ff6464";
+    ctx.font = "bold 42px Arial";
+
+    const delta = difference === 0
+        ?"NEW PB SET!":`${difference > 0? "+" : " "}${difference.toFixed(3)}s`;
+
+    ctx.fillText(delta,565,490);
+
+    ctx.fillStyle = "#777b83";
+    ctx.font = "20px Arial";
+    ctx.fillText("MADE BY ETHAN PAUL K", 55, 565);
+
+    const link = document.createElement("a");
+    link.download = "reaction-result.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+}
+
+instruction.addEventListener("click", (e)=>{
+    createShareCard(pastScore, highscore);
+})

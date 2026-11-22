@@ -546,3 +546,28 @@ box-sizing: border-box;
     
     padding: 20px 50px;
 }
+
+
+.instruction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    border: 1px solid #ff202080;
+    background: #080808cc;
+
+    padding: 12px 25px;
+    width: min(450px, 90vw);
+
+    font-size: clamp(9px, 1.2vw, 13px);
+    letter-spacing: 2px;
+    text-align: center;
+
+    box-shadow: 0 0 18px #ff000015;
+}
+
+.arrow {
+    color: var(--red);
+    font-size: 20px;
+}
