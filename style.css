@@ -512,19 +512,20 @@ box-sizing: border-box;
 
 .highscores{
     position: absolute;
-    padding: 3px;
+    padding: 20px;
     height: fit-content;
-    width: 50%;
-
+    width: 620px;
+    background: #15171c;
     /*  align-items: center; */
     
     /* display: flex; */
-    backdrop-filter: blur(12px);
+    /* backdrop-filter: blur(12px); */
 
-    border: 1px solid rgba(255, 255, 255, 0.096);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid #33363d;
+    border-radius: 12px;
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
     z-index: 100;
+    color: white;
 }
 
 .hidden{
@@ -570,4 +571,50 @@ box-sizing: border-box;
 .arrow {
     color: var(--red);
     font-size: 20px;
+}
+
+.highscores h1{
+    font-size:22px;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#highscorelist{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#highscorelist li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #22252b;
+    border-left: 3px solid #e10600;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    font-family: monospace;
+    transition: 0.2s ease;
+}
+
+#highscorelist li:hover{
+    background: #30333a;
+    transform: translateX(4px);
+}
+
+#highscorelist li:first-child{
+    border-left-color: #ffd700;
+    background: #2b2920;
+
+}
+#highscorelist li span{
+    color: #888;
+
+}
+
+#highscorelist li strong{
+    color: white;
+    font-size: 16px;
 }

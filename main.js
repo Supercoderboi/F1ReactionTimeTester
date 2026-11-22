@@ -10,6 +10,8 @@ const light5 = document.getElementById('light5');
 const hi = document.getElementById('HighScore');
 const hs = document.getElementById("hs");
 const instruction = document.getElementById("instruction")
+const highscoreListt = document.getElementById("highscorelist");
+
 
 let pastScore=0;
 let openedList = false;
@@ -169,14 +171,18 @@ highscorebtn.addEventListener("click", (e) => {
 
     if (hsArr.length > 0) {
         
-        hs.innerHTML = "";
+        highscoreListt.innerHTML = "";
         let ordered = [...hsArr].sort((a, b) => a - b);
 
         console.log(ordered);
         let i =1;
         // Display scores
         ordered.forEach(score => {
-            hs.insertAdjacentHTML("beforeend", `<div class="item">${i})      ${score}</div>`)
+            highscoreListt.insertAdjacentHTML("beforeend", 
+                `<li>
+                <span>#${i}</span>
+                <strong>${score.toFixed(3)}s</strong>
+                </li>`);
             i++;
         });
 
