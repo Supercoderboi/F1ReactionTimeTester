@@ -116,22 +116,21 @@ speedometer.addEventListener('click', async (e) => {
         }
          //aim is to push the highscore int oarray and remove the slowest one
 
-            if(highscoreList.length -1 >10){
-            let temp =highscoreList[0];
-            for(let i = highscoreList.length; i!=0; i--){
-                if(highscoreList[i] > temp){
-                    temp=highscoreList[i]
-                }
-                
-                
-            }
-            highscoreList.splice(highscoreList.indexOf(temp),1); 
-        }
+            highscoreList = highscoreList
+                .filter(score => Number.isFinite(score) && score > 0)
+                .sort((a, b) => a - b)
+                .slice(0, 10);
+
+            // Update personal best
+            highscore = highscoreList[0] || 0;
+            hi.textContent = highscore.toFixed(3);
+
+            // Save
+            localStorage.setItem("Highscore", JSON.stringify(highscoreList));
             highscoreList.push(tim);
             // localStorage.setItem("Highscore", highscoreList);
-            localStorage.setItem('Highscore', JSON.stringify(highscoreList));
             console.log(highscoreList); 
-        stopNeedle();
+            stopNeedle();
             gameActive = false;
             reset();
     }
